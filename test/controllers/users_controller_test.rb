@@ -33,6 +33,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select "td", text: todos(:buy_milk).title
   end
 
+  test "user show links todo title to show page" do
+    get user_url(@user)
+    assert_select "a[href='#{todo_path(todos(:buy_milk))}']", text: todos(:buy_milk).title
+  end
+
   test "user show has complete button for incomplete todos" do
     get user_url(@user)
     assert_select "form[action='#{todo_path(todos(:buy_milk))}']"

@@ -11,6 +11,11 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "index links todo title to show page" do
+    get todos_url
+    assert_select "a[href='#{todo_path(@todo)}']", text: @todo.title
+  end
+
   test "index shows complete button for incomplete todos" do
     get todos_url
     assert_select "form[action='#{todo_path(todos(:buy_milk))}']"

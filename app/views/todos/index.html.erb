@@ -17,12 +17,11 @@
   <tbody>
     <% @todos.each do |todo| %>
       <tr>
-        <td><%= todo.title %></td>
+        <td><%= link_to todo.title, todo %></td>
         <td><%= todo.description %></td>
         <td><%= link_to todo.user.full_name, todo.user %></td>
         <td><%= todo.complete ? "Yes" : "No" %></td>
         <td>
-          <%= link_to "View", todo %>
           <% unless todo.complete %>
             <%= button_to "Complete", todo, method: :patch, params: { todo: { complete: true } } %>
           <% end %>
