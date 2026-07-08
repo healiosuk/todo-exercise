@@ -1,24 +1,27 @@
-# README
+# Todo Exercise
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple Rails todo app shared with interview candidates as context for technical questions. You are welcome to run it locally — doing so may help, but is not required.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- Docker & Docker Compose
 
-* System dependencies
+## Getting started
 
-* Configuration
+```sh
+make start    # start the app
+make migrate  # set up the database
+make seed     # load sample data
+```
 
-* Database creation
+Then open http://localhost:3000/users or http://localhost:3000/todos.
 
-* Database initialization
+```sh
+make stop     # shut everything down
+```
 
-* How to run the test suite
+## Running tests
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+make test
+```
