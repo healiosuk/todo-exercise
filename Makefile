@@ -10,13 +10,13 @@ stop:
 	docker compose down
 
 migrate:
-	docker compose run --rm web rails db:migrate
+	docker compose run --rm web bin/rails db:migrate
 
 seed:
-	docker compose run --rm web rails db:seed
+	docker compose run --rm web bin/rails db:seed
 
 test:
-	docker compose run --rm -e RAILS_ENV=test web rails test
+	docker compose run --rm -e RAILS_ENV=test web bin/rails test
 
 lint:
 	docker compose run --rm web bin/rubocop -a
