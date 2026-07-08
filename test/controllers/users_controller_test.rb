@@ -33,6 +33,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_select "td", text: todos(:buy_milk).title
   end
 
+  test "user show has complete button for incomplete todos" do
+    get user_url(@user)
+    assert_select "form[action='#{todo_path(todos(:buy_milk))}']"
+  end
+
+  test "user show has no complete button for already complete todos" do
+    get user_url(users(:bob))
+    assert_select "form[action='#{todo_path(todos(:write_tests))}']", count: 0
+  end
+
   test "show displays no todos message when user has none" do
     user = User.create!(first_name: "Empty", last_name: "User", email: "empty@example.com")
     get user_url(user)

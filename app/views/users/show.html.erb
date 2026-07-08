@@ -20,7 +20,12 @@
           <td><%= todo.title %></td>
           <td><%= todo.description %></td>
           <td><%= todo.complete ? "Yes" : "No" %></td>
-          <td><%= link_to "View", todo %></td>
+          <td>
+            <%= link_to "View", todo %>
+            <% unless todo.complete %>
+              <%= button_to "Complete", todo, method: :patch, params: { todo: { complete: true } } %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

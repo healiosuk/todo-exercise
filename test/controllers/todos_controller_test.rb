@@ -11,6 +11,21 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "index shows complete button for incomplete todos" do
+    get todos_url
+    assert_select "form[action='#{todo_path(todos(:buy_milk))}']"
+  end
+
+  test "index does not show complete button for already complete todos" do
+    get todos_url
+    assert_select "form[action='#{todo_path(todos(:write_tests))}']", count: 0
+  end
+
+  test "completing a todo via patch marks it done" do
+    patch todo_url(@todo), params: { todo: { complete: true } }
+    assert @todo.reload.complete
+  end
+
   test "index shows user full name linked to user page" do
     get todos_url
     assert_select "a[href='#{user_path(@user)}']", text: @user.full_name
