@@ -10,6 +10,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "index links full name to user show page" do
+    get users_url
+    assert_select "a[href='#{user_path(@user)}']", text: @user.full_name
+  end
+
   test "should get new" do
     get new_user_url
     assert_response :success
