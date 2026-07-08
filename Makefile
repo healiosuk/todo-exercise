@@ -1,4 +1,4 @@
-.PHONY: start logs stop migrate test
+.PHONY: start logs stop migrate seed test
 
 start:
 	docker compose up -d
@@ -11,6 +11,9 @@ stop:
 
 migrate:
 	docker compose run --rm web rails db:migrate
+
+seed:
+	docker compose run --rm web rails db:seed
 
 test:
 	docker compose run --rm -e RAILS_ENV=test web rails test
