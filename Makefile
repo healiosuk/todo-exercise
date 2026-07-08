@@ -1,4 +1,4 @@
-.PHONY: start logs stop migrate seed test lint
+.PHONY: start logs stop migrate seed test lint setup
 
 start:
 	docker compose up -d
@@ -20,3 +20,9 @@ test:
 
 lint:
 	docker compose run --rm web bin/rubocop -a
+
+build:
+	docker compose build
+
+setup: build
+	docker compose run --rm web bin/rails db:create db:migrate db:seed
