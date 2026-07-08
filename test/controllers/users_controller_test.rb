@@ -28,6 +28,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "show displays the user's todos" do
+    get user_url(@user)
+    assert_select "##{dom_id(todos(:buy_milk))}"
+  end
+
+  test "show displays no todos message when user has none" do
+    user = User.create!(first_name: "Empty", last_name: "User", email: "empty@example.com")
+    get user_url(user)
+    assert_select "p", text: "No todos yet."
+  end
+
   test "should get edit" do
     get edit_user_url(@user)
     assert_response :success

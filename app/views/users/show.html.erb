@@ -2,6 +2,16 @@
 
 <%= render @user %>
 
+<h2>Todos</h2>
+
+<% if @user.todos.any? %>
+  <% @user.todos.each do |todo| %>
+    <%= render todo %>
+  <% end %>
+<% else %>
+  <p>No todos yet.</p>
+<% end %>
+
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
