@@ -13,7 +13,7 @@ end
   { user: alice, title: "Book dentist",     description: "6-month check-up",            complete: true  },
   { user: bob,   title: "Write tests",      description: "Cover models and controllers", complete: true  },
   { user: bob,   title: "Review PR",        description: "Check the auth changes",       complete: false },
-  { user: bob,   title: "Update README",    description: "Add setup instructions",       complete: false },
+  { user: bob,   title: "Update README",    description: "Add setup instructions",       complete: false }
 ].each do |attrs|
   Todo.find_or_create_by!(title: attrs[:title], user: attrs[:user]) do |t|
     t.description = attrs[:description]

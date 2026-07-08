@@ -1,4 +1,4 @@
-.PHONY: start logs stop migrate seed test
+.PHONY: start logs stop migrate seed test lint
 
 start:
 	docker compose up -d
@@ -17,3 +17,6 @@ seed:
 
 test:
 	docker compose run --rm -e RAILS_ENV=test web rails test
+
+lint:
+	docker compose run --rm web bin/rubocop -a
