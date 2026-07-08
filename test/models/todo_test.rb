@@ -25,4 +25,10 @@ class TodoTest < ActiveSupport::TestCase
     @todo.update!(complete: true)
     assert @todo.reload.complete
   end
+
+  test "is invalid without a title" do
+    todo = Todo.new(description: "No title", user: users(:alice))
+    assert_not todo.valid?
+    assert_includes todo.errors[:title], "can't be blank"
+  end
 end
