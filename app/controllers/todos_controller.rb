@@ -5,6 +5,9 @@ class TodosController < ApplicationController
   # GET /todos or /todos.json
   def index
     @todos = Todo.all
+    @total = Todo.count
+    @completed = @todos.filter { |todo| todo.complete? }.count
+    @overdue = @todos.filter { |todo| todo.due_date < Date.today && !todo.complete }.count
   end
 
   # GET /todos/1 or /todos/1.json
@@ -66,7 +69,7 @@ class TodosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def todo_params
-      params.expect(todo: [ :title, :description, :user_id, :complete ])
+      params.expect(todo: [ :title, :description, :user_id, :complete, :due_date, :priority ])
     end
 
     def set_users

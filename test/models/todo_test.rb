@@ -31,4 +31,9 @@ class TodoTest < ActiveSupport::TestCase
     assert_not todo.valid?
     assert_includes todo.errors[:title], "can't be blank"
   end
+
+  test "priority defaults to medium" do
+    todo = Todo.create!(title: "Default priority task", user: users(:alice))
+    assert_equal "medium", todo.priority
+  end
 end
