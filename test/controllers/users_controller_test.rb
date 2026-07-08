@@ -30,7 +30,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "show displays the user's todos" do
     get user_url(@user)
-    assert_select "##{dom_id(todos(:buy_milk))}"
+    assert_select "td", text: todos(:buy_milk).title
   end
 
   test "show displays no todos message when user has none" do

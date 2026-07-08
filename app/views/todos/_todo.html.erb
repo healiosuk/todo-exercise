@@ -1,22 +1,22 @@
 <div id="<%= dom_id todo %>">
-  <div>
-    <strong>Title:</strong>
-    <%= todo.title %>
-  </div>
-
-  <div>
-    <strong>Description:</strong>
-    <%= todo.description %>
-  </div>
-
-  <div>
-    <strong>User:</strong>
-    <%= link_to todo.user.full_name, todo.user %>
-  </div>
-
-  <div>
-    <strong>Complete:</strong>
-    <%= todo.complete %>
-  </div>
-
+  <table class="detail-table">
+    <tbody>
+      <tr>
+        <th>Title</th>
+        <td><%= todo.title %></td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td><%= todo.description %></td>
+      </tr>
+      <tr>
+        <th>User</th>
+        <td><%= link_to todo.user.full_name, todo.user %></td>
+      </tr>
+      <tr>
+        <th>Complete</th>
+        <td><%= todo.complete ? "Yes" : "No" %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
