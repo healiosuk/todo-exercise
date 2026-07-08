@@ -54,8 +54,14 @@ RUN bundle exec bootsnap precompile -j 1 app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-
-
+# Development stage — keeps build tools so native gems can compile
+FROM build AS develop
+ENV RAILS_ENV="development" \
+    BUNDLE_WITHOUT="" \
+    BUNDLE_DEPLOYMENT="0"
+RUN bundle install
+EXPOSE 3000
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
 
 # Final stage for app image
 FROM base
