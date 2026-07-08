@@ -9,7 +9,6 @@ services:
       - "3000:3000"
     environment:
       RAILS_ENV: development
-      DATABASE_URL: postgres://postgres:password@db:5432/app_development
     depends_on:
       - db
     stdin_open: true

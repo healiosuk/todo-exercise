@@ -2,7 +2,8 @@ require "test_helper"
 
 class TodosControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @todo = todos(:one)
+    @todo = todos(:buy_milk)
+    @user = users(:alice)
   end
 
   test "should get index" do
@@ -17,7 +18,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create todo" do
     assert_difference("Todo.count") do
-      post todos_url, params: { todo: { complete: @todo.complete, description: @todo.description, title: @todo.title, user_id: @todo.user_id } }
+      post todos_url, params: { todo: { title: "New task", description: "Details", user_id: @user.id, complete: false } }
     end
 
     assert_redirected_to todo_url(Todo.last)
@@ -34,7 +35,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update todo" do
-    patch todo_url(@todo), params: { todo: { complete: @todo.complete, description: @todo.description, title: @todo.title, user_id: @todo.user_id } }
+    patch todo_url(@todo), params: { todo: { title: "Updated title", description: @todo.description, user_id: @todo.user_id, complete: true } }
     assert_redirected_to todo_url(@todo)
   end
 

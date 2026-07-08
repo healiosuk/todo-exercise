@@ -1,5 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show edit update destroy ]
+  before_action :set_users, only: %i[ new edit create update ]
 
   # GET /todos or /todos.json
   def index
@@ -66,5 +67,9 @@ class TodosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def todo_params
       params.expect(todo: [ :title, :description, :user_id, :complete ])
+    end
+
+    def set_users
+      @users = User.order(:last_name, :first_name)
     end
 end
