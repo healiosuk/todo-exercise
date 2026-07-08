@@ -11,6 +11,11 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "index shows user full name linked to user page" do
+    get todos_url
+    assert_select "a[href='#{user_path(@user)}']", text: @user.full_name
+  end
+
   test "should get new" do
     get new_todo_url
     assert_response :success
@@ -27,6 +32,11 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
   test "should show todo" do
     get todo_url(@todo)
     assert_response :success
+  end
+
+  test "show displays user full name linked to user page" do
+    get todo_url(@todo)
+    assert_select "a[href='#{user_path(@user)}']", text: @user.full_name
   end
 
   test "should get edit" do
