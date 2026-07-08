@@ -1,11 +1,13 @@
 <% content_for :title, "New user" %>
 
-<h1>New user</h1>
+<div class="mb-6">
+  <h1 class="text-2xl font-bold text-gray-900">New user</h1>
+</div>
 
-<%= render "form", user: @user %>
+<div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-lg p-6">
+  <%= render "form", user: @user %>
+</div>
 
-<br>
-
-<div>
-  <%= link_to "Back to users", users_path %>
+<div class="mt-4">
+  <%= link_to "Back to users", users_path, class: "text-sm font-semibold text-gray-600 hover:text-gray-900" %>
 </div>

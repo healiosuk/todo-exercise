@@ -1,40 +1,64 @@
-<p class="notice"><%= notice %></p>
+<% content_for :title, @user.full_name %>
 
-<%= render @user %>
+<div class="mb-6">
+  <h1 class="text-2xl font-bold text-gray-900"><%= @user.full_name %></h1>
+</div>
 
-<h2>Todos</h2>
+<div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-lg overflow-hidden mb-8">
+  <%= render @user %>
+</div>
+
+<div class="sm:flex sm:items-center sm:justify-between mb-4">
+  <h2 class="text-lg font-semibold text-gray-900">Todos</h2>
+  <%= link_to "New todo", new_todo_path, class: "mt-2 sm:mt-0 rounded-md bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-indigo-500 transition-colors" %>
+</div>
 
 <% if @user.todos.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Complete</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @user.todos.each do |todo| %>
+  <div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-lg overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
         <tr>
-          <td><%= link_to todo.title, todo %></td>
-          <td><%= todo.description %></td>
-          <td><%= todo.complete ? "Yes" : "No" %></td>
-          <td>
-            <% unless todo.complete %>
-              <%= button_to "Complete", todo, method: :patch, params: { todo: { complete: true } } %>
-            <% end %>
-          </td>
+          <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Title</th>
+          <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden sm:table-cell">Description</th>
+          <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+          <th class="px-3 py-3.5"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <% @user.todos.each do |todo| %>
+          <tr class="hover:bg-gray-50 transition-colors">
+            <td class="py-4 pl-4 pr-3 text-sm font-medium">
+              <%= link_to todo.title, todo, class: "text-indigo-600 hover:text-indigo-900" %>
+            </td>
+            <td class="px-3 py-4 text-sm text-gray-500 max-w-xs truncate hidden sm:table-cell">
+              <%= todo.description %>
+            </td>
+            <td class="px-3 py-4 text-sm">
+              <% if todo.complete %>
+                <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">Complete</span>
+              <% else %>
+                <span class="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-700">Pending</span>
+              <% end %>
+            </td>
+            <td class="px-3 py-4 text-sm text-right">
+              <% unless todo.complete %>
+                <%= button_to "Mark complete", todo, method: :patch, params: { todo: { complete: true } },
+                    class: "rounded bg-green-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-green-500 transition-colors" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% else %>
-  <p>No todos yet.</p>
+  <p class="text-sm text-gray-500">No todos yet.</p>
 <% end %>
 
-<div class="actions">
-  <%= link_to "Edit", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
-  <%= button_to "Delete", @user, method: :delete %>
+<div class="mt-8 flex flex-wrap items-center gap-3">
+  <%= link_to "Edit", edit_user_path(@user), class: "rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-colors" %>
+  <%= link_to "Back to users", users_path, class: "text-sm font-semibold text-gray-600 hover:text-gray-900" %>
+  <%= button_to "Delete", @user, method: :delete,
+      class: "ml-auto rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 transition-colors",
+      data: { turbo_confirm: "Delete this user and all their todos?" } %>
 </div>

@@ -1,10 +1,21 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, @todo.title %>
 
-<%= render @todo %>
+<div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+  <h1 class="text-2xl font-bold text-gray-900"><%= @todo.title %></h1>
+  <% unless @todo.complete %>
+    <%= button_to "Mark complete", @todo, method: :patch, params: { todo: { complete: true } },
+        class: "rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 transition-colors" %>
+  <% end %>
+</div>
 
-<div>
-  <%= link_to "Edit this todo", edit_todo_path(@todo) %> |
-  <%= link_to "Back to todos", todos_path %>
+<div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-lg overflow-hidden mb-6">
+  <%= render @todo %>
+</div>
 
-  <%= button_to "Destroy this todo", @todo, method: :delete %>
+<div class="flex flex-wrap items-center gap-3">
+  <%= link_to "Edit", edit_todo_path(@todo), class: "rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition-colors" %>
+  <%= link_to "Back to todos", todos_path, class: "text-sm font-semibold text-gray-600 hover:text-gray-900" %>
+  <%= button_to "Delete", @todo, method: :delete,
+      class: "ml-auto rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 transition-colors",
+      data: { turbo_confirm: "Delete this todo?" } %>
 </div>

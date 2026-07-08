@@ -25,6 +25,7 @@
 
 # Ignore assets (compiled JS/CSS).
 /public/assets
+/app/assets/builds/*.css
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
