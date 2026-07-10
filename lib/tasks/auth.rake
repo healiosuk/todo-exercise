@@ -3,6 +3,7 @@ namespace :auth do
   task set_password: :environment do
     require "bcrypt"
 
+    print "We need to set a password for authentication in your dev environment. Do so now. 'password' is fine.\n"
     print "New password: "
     system "stty -echo"
     password = $stdin.gets.chomp

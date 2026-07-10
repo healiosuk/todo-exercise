@@ -28,6 +28,7 @@
 /app/assets/builds/*.css
 
 # Ignore master key for decrypting credentials and more.
+/config/credentials.yml.enc
 /config/master.key
 /config/credentials/*.key
 
