@@ -54,7 +54,7 @@ Docker is the recommended way to run the app.
 **Requirements:** [Docker](https://docs.docker.com/get-started/) and Docker Compose.
 
 ```sh
-make setup      # Build containers and setup database
+make setup      # Build containers and setup database, set the login password
 make seed       # load sample data (2 users, 5 todos)
 make start      # start the app (docker compose up -d)
 ```

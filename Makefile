@@ -1,4 +1,4 @@
-.PHONY: start logs stop migrate seed test lint setup set-password
+.PHONY: start logs stop migrate seed test lint setup set-password init-credentials
 
 start:
 	docker compose up -d
@@ -24,7 +24,10 @@ lint:
 build:
 	docker compose build
 
-setup: build set-password
+init-credentials:
+	docker compose run --rm web bin/rails credentials:edit
+
+setup: build init-credentials set-password
 	docker compose run --rm web bin/rails db:create db:schema:load
 
 set-password:

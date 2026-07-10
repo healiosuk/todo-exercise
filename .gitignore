@@ -36,3 +36,7 @@
 
 # Ruby LSP
 /.ruby-lsp
+
+# Ignore key files for decrypting credentials and more.
+/config/*.key
+
