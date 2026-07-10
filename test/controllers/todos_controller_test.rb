@@ -36,6 +36,11 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{user_path(@user)}']", text: @user.full_name
   end
 
+  test "index shows summary stats" do
+    get todos_url
+    assert_response :success
+  end
+
   test "should get new" do
     get new_todo_url
     assert_response :success
@@ -43,7 +48,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create todo" do
     assert_difference("Todo.count") do
-      post todos_url, params: { todo: { title: "New task", description: "Details", user_id: @user.id, complete: false } }
+      post todos_url, params: { todo: { title: "New task", description: "Details", user_id: @user.id, complete: false, priority: "high", due_date: "2026-07-20" } }
     end
 
     assert_redirected_to todo_url(Todo.last)

@@ -3,9 +3,13 @@ buy_milk:
   description: Semi-skimmed from the corner shop
   user: alice
   complete: false
+  priority: low
+  due_date: 2026-07-15
 
 write_tests:
   title: Write tests
   description: Cover models and controllers
   user: bob
   complete: true
+  priority: high
+  due_date: 2026-07-01
