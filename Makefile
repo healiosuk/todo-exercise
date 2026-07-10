@@ -24,8 +24,8 @@ lint:
 build:
 	docker compose build
 
-css:
-	docker compose run --rm web bin/rails tailwindcss:build
-
 setup: build
-	docker compose run --rm web bin/rails db:create db:migrate db:seed
+	docker compose run --rm web bin/rails db:create db:schema:load
+
+purge:
+	docker compose down -v --remove-orphans --rmi=all

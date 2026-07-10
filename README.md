@@ -54,9 +54,9 @@ Docker is the recommended way to run the app.
 **Requirements:** [Docker](https://docs.docker.com/get-started/) and Docker Compose.
 
 ```sh
-make start      # start the app (docker compose up -d)
-make migrate    # run pending migrations
+make setup      # Build containers and setup database
 make seed       # load sample data (2 users, 5 todos)
+make start      # start the app (docker compose up -d)
 ```
 
 Open http://localhost:3000/users or http://localhost:3000/todos — there is no
@@ -70,6 +70,9 @@ make stop       # shut everything down
 ## Running tests
 
 ```sh
+# Build containers and setup database
+make setup
+
 # Full test suite (matches CI)
 make test
 
@@ -89,6 +92,12 @@ docker compose run --rm -e RAILS_ENV=test web rails test:system
 docker compose run --rm web bin/rubocop
 docker compose run --rm web bin/brakeman --no-pager
 docker compose run --rm web bin/bundler-audit
+```
+
+## Cleanup
+
+```sh
+make purge # stop containers and remove images all artefacts
 ```
 
 ## CI
