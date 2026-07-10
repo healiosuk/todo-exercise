@@ -62,6 +62,8 @@ make start      # start the app (docker compose up -d)
 Open http://localhost:3000/users or http://localhost:3000/todos — there is no
 root route.
 
+The default password is `password`
+
 ```sh
 make logs       # follow container logs
 make stop       # shut everything down
